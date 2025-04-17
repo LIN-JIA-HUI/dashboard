@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Activity, Filter, RefreshCw, Settings, BarChart2, PieChart, Monitor, Battery, Zap, Download, ChevronDown, ChevronUp } from 'lucide-react';
+import { Activity, Filter, RefreshCw, Settings, BarChart2, PieChart, Monitor, Battery, Zap, Download, ChevronDown, ChevronUp, Clock, Calendar, Laptop, Cpu } from 'lucide-react';
 import { benchmarkSystems, BenchmarkSystem } from '../data/benchmark-data';
 import FilterPanel from './ui/filter-panel';
 import BenchmarkSelector, { BenchmarkType } from './ui/benchmark-selector';
-import SystemDetails from './ui/system-details';
+import SystemInfoView from './ui/system-info-view';
 import BenchmarkCard from './ui/benchmark-card';
+import TimelineView from './ui/timeline/timeline-view';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overall');
@@ -86,6 +87,7 @@ const Dashboard = () => {
           <TabButton active={activeTab === 'creator'} onClick={() => setActiveTab('creator')} icon={<Monitor className="h-4 w-4" />} label="Creator Benchmark" />
           <TabButton active={activeTab === 'battery'} onClick={() => setActiveTab('battery')} icon={<Battery className="h-4 w-4" />} label="Battery Benchmark" />
           <TabButton active={activeTab === 'power'} onClick={() => setActiveTab('power')} icon={<Zap className="h-4 w-4" />} label="CPU/GPU Power" />
+          <TabButton active={activeTab === 'timeline'} onClick={() => setActiveTab('timeline')} icon={<Calendar className="h-4 w-4" />} label="Timeline" />
         </div>
       </div>
       
@@ -95,82 +97,93 @@ const Dashboard = () => {
         {/* <div className="grid grid-cols-4 gap-4">
           <KpiCard title="Avg. Time Spy" value={avgTimeSpyScore.toLocaleString()} change="+12.3%" icon={<Activity className="h-5 w-5" />} />
           <KpiCard title="Avg. Graphics Score" value={avgGraphicsScore.toLocaleString()} change="+8.7%" icon={<BarChart2 className="h-5 w-5" />} />
-          <KpiCard title="Avg. CPU Score" value={avgCPUScore.toLocaleString()} change="+5.2%" icon={<BarChart2 className="h-5 w-5" />} />
-          <KpiCard title="Systems Tested" value={filteredSystems.length.toString()} change={`${filteredSystems.length - benchmarkSystems.length}`} icon={<Activity className="h-5 w-5" />} />
+          <KpiCard title="Avg. CPU Score" value={avgCPUScore.toLocaleString()} change="+5.2%" icon={<Activity className="h-5 w-5" />} />
+          <KpiCard title="Systems Tested" value={filteredSystems.length.toString()} change="+2" icon={<Laptop className="h-5 w-5" />} />
         </div> */}
+        
+        {/* Timeline View (shown only on timeline tab) */}
+        {activeTab === 'timeline' && (
+          <TimelineView systems={filteredSystems} />
+        )}
         
         {/* Content layout: Sidebar + Main area */}
         <div className="grid grid-cols-12 gap-6">
           {/* Sidebar */}
           <div className="col-span-3 space-y-6">
-            {/* Benchmark selector */}
-            <BenchmarkSelector 
-              selectedBenchmarks={selectedBenchmarks} 
-              onChange={setSelectedBenchmarks} 
-            />
+            {/* Benchmark selector - not shown on timeline tab */}
+            {activeTab !== 'timeline' && (
+              <BenchmarkSelector 
+                selectedBenchmarks={selectedBenchmarks} 
+                onChange={setSelectedBenchmarks} 
+              />
+            )}
             
             {/* Selected system details */}
             {selectedSystem && (
-              <SystemDetails system={selectedSystem} />
+              <SystemInfoView system={selectedSystem} />
             )}
           </div>
           
           {/* Main content area */}
           <div className="col-span-9 space-y-6">
-            {/* Benchmark cards */}
-            <div className="grid grid-cols-1 gap-6">
-              {selectedBenchmarks.map(benchmarkType => (
-                <BenchmarkCard 
-                  key={benchmarkType}
-                  benchmarkType={benchmarkType}
-                  systems={filteredSystems}
-                />
-              ))}
-            </div>
+            {/* Benchmark cards - shown on all tabs except timeline */}
+            {activeTab !== 'timeline' && (
+              <div className="grid grid-cols-1 gap-6">
+                {selectedBenchmarks.map(benchmarkType => (
+                  <BenchmarkCard 
+                    key={benchmarkType}
+                    benchmarkType={benchmarkType}
+                    systems={filteredSystems}
+                  />
+                ))}
+              </div>
+            )}
             
-            {/* Systems table */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                <h2 className="font-semibold">System Comparison</h2>
-                <div className="flex space-x-2">
-                  <button className="p-1.5 rounded bg-gray-100 dark:bg-gray-700">
-                    <Download className="h-4 w-4" />
-                  </button>
+            {/* Systems table - shown on all tabs except timeline */}
+            {activeTab !== 'timeline' && (
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+                <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                  <h2 className="font-semibold">System Comparison</h2>
+                  <div className="flex space-x-2">
+                    <button className="p-1.5 rounded bg-gray-100 dark:bg-gray-700">
+                      <Download className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead>
+                      <tr className="bg-gray-50 dark:bg-gray-800">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">System</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">CPU</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">GPU</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Time Spy</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Graphics Score</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">CPU Score</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      {filteredSystems.map((system) => (
+                        <tr 
+                          key={system.id} 
+                          className={`hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${
+                            selectedSystem?.id === system.id ? 'bg-blue-50 dark:bg-blue-900/20' : ''
+                          }`}
+                          onClick={() => handleSystemSelect(system)}
+                        >
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{system.systemName}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.CPU || '-'}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.GPU || '-'}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpy?.toLocaleString() || '-'}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpyGraphicsScore?.toLocaleString() || '-'}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpyCPUScore?.toLocaleString() || '-'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead>
-                    <tr className="bg-gray-50 dark:bg-gray-800">
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">System</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">CPU</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">GPU</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Time Spy</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Graphics Score</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">CPU Score</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                    {filteredSystems.map((system) => (
-                      <tr 
-                        key={system.id} 
-                        className={`hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${
-                          selectedSystem?.id === system.id ? 'bg-blue-50 dark:bg-blue-900/20' : ''
-                        }`}
-                        onClick={() => handleSystemSelect(system)}
-                      >
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{system.systemName}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.CPU || '-'}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.GPU || '-'}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpy?.toLocaleString() || '-'}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpyGraphicsScore?.toLocaleString() || '-'}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpyCPUScore?.toLocaleString() || '-'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </main>
