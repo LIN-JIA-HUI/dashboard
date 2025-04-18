@@ -110,9 +110,9 @@ const TimelineView: React.FC<TimelineViewProps> = ({ systems }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">PM Submit Date</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Target Date</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Completion Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Duration</th>
+              {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Duration</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-1/4">Progress</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-1/4">Progress</th> */}
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -160,7 +160,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({ systems }) => {
                       <span className="text-gray-400">Pending</span>
                     )}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                  {/* <td className="px-6 py-4 whitespace-nowrap text-sm">
                     {systemInfo.PMSubmitDate && systemInfo.TargetCompletionDate ? (
                       calculateDuration(systemInfo.PMSubmitDate, systemInfo.ActualCompletionDate || systemInfo.TargetCompletionDate)
                     ) : (
@@ -182,7 +182,7 @@ const TimelineView: React.FC<TimelineViewProps> = ({ systems }) => {
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}

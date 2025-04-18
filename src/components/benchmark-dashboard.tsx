@@ -64,7 +64,7 @@ const Dashboard = () => {
       <header className="bg-white dark:bg-gray-800 shadow-md px-6 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Activity className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-          <h1 className="text-xl font-semibold">Performance Benchmark Dashboard</h1>
+          <h1 className="text-xl font-semibold">效能資料庫</h1>
         </div>
         <div className="flex items-center space-x-4">
           <FilterPanel onFilterChange={setFilters} filters={filters} />
