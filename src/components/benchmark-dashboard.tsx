@@ -86,7 +86,7 @@ const Dashboard = () => {
           <TabButton active={activeTab === 'gaming'} onClick={() => setActiveTab('gaming')} icon={<PieChart className="h-4 w-4" />} label="Gaming Benchmark" />
           <TabButton active={activeTab === 'creator'} onClick={() => setActiveTab('creator')} icon={<Monitor className="h-4 w-4" />} label="Creator Benchmark" />
           <TabButton active={activeTab === 'battery'} onClick={() => setActiveTab('battery')} icon={<Battery className="h-4 w-4" />} label="Battery Benchmark" />
-          <TabButton active={activeTab === 'power'} onClick={() => setActiveTab('power')} icon={<Zap className="h-4 w-4" />} label="CPU/GPU Power" />
+          {/* <TabButton active={activeTab === 'power'} onClick={() => setActiveTab('power')} icon={<Zap className="h-4 w-4" />} label="CPU/GPU Power" /> */}
           <TabButton active={activeTab === 'timeline'} onClick={() => setActiveTab('timeline')} icon={<Calendar className="h-4 w-4" />} label="Timeline" />
         </div>
       </div>
@@ -145,21 +145,22 @@ const Dashboard = () => {
                 <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
                   <h2 className="font-semibold">System Comparison</h2>
                   <div className="flex space-x-2">
-                    <button className="p-1.5 rounded bg-gray-100 dark:bg-gray-700">
+                    {/* <button className="p-1.5 rounded bg-gray-100 dark:bg-gray-700">
                       <Download className="h-4 w-4" />
-                    </button>
+                    </button> */}
                   </div>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead>
                       <tr className="bg-gray-50 dark:bg-gray-800">
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">System</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">P/N</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">CPU</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">GPU</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Time Spy</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Graphics Score</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">CPU Score</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">BIOS</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">EC</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">VBIOS</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">VGA DRIVER</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -174,9 +175,10 @@ const Dashboard = () => {
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{system.systemName}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.CPU || '-'}</td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.GPU || '-'}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpy?.toLocaleString() || '-'}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpyGraphicsScore?.toLocaleString() || '-'}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.benchmarkScores.TimeSpyCPUScore?.toLocaleString() || '-'}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.BIOS || '-'}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.EC || '-'}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.VBIOS || '-'}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">{system.systemInfo.VGA_Driver || '-'}</td>
                         </tr>
                       ))}
                     </tbody>

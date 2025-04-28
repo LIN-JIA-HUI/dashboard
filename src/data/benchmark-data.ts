@@ -66,7 +66,7 @@ export interface BenchmarkSystem {
 export const benchmarkSystems: BenchmarkSystem[] = [
   {
     id: 1,
-    systemName: "System A",
+    systemName: "9S7-15G221-02S",
     systemInfo: {
       State: "Production",
       Series: "TravelBook",
@@ -81,7 +81,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
       EC: "EC1.4",
       VBIOS: "V1.03",
       VGA_Driver: "546.33",
-      PN: "TBZ7890",
+      PN: "9S7-15G221-02S",
       PMSubmitDate: "2025-02-15",
       TargetCompletionDate: "2025-03-05",
       ActualCompletionDate: "2025-03-03"
@@ -107,7 +107,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
   },
   {
     id: 2,
-    systemName: "System B",
+    systemName: "9S7-13P311-25S",
     systemInfo: {
       State: "Production",
       Series: "PowerBook",
@@ -122,7 +122,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
       EC: "EC2.1",
       VBIOS: "V2.05",
       VGA_Driver: "551.86",
-      PN: "PBX9012",
+      PN: "9S7-13P311-25S",
       PMSubmitDate: "2025-01-20",
       TargetCompletionDate: "2025-02-10",
       ActualCompletionDate: "2025-02-15"
@@ -148,7 +148,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
   },
   {
     id: 3,
-    systemName: "System C",
+    systemName: "9S7-15M111-02S",
     systemInfo: {
       State: "Pre-production",
       Series: "GamingBook",
@@ -163,7 +163,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
       EC: "EC3.5",
       VBIOS: "V2.11",
       VGA_Driver: "553.75",
-      PN: "GBX4567",
+      PN: "9S7-15M111-02S",
       PMSubmitDate: "2025-02-01",
       TargetCompletionDate: "2025-03-15",
       ActualCompletionDate: "2025-03-10"
@@ -189,7 +189,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
   },
   {
     id: 4,
-    systemName: "System D",
+    systemName: "9S7-17Q211-05S",
     systemInfo: {
       State: "Production",
       Series: "UltraBook",
@@ -204,7 +204,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
       EC: "EC1.9",
       VBIOS: "N/A",
       VGA_Driver: "31.0.101.4575",
-      PN: "UBX2345",
+      PN: "9S7-17Q211-05S",
       PMSubmitDate: "2025-01-10",
       TargetCompletionDate: "2025-01-30",
       ActualCompletionDate: "2025-01-28"
@@ -228,7 +228,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
   },
   {
     id: 5,
-    systemName: "System E",
+    systemName: "9S7-17Q211-06S",
     systemInfo: {
       State: "Production",
       Series: "WorkBook",
@@ -243,7 +243,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
       EC: "EC2.8",
       VBIOS: "V3.02",
       VGA_Driver: "552.22",
-      PN: "WBX7812",
+      PN: "9S7-17Q211-06S",
       PMSubmitDate: "2025-02-20",
       TargetCompletionDate: "2025-04-01",
       ActualCompletionDate: "2025-03-25"
@@ -269,7 +269,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
   },
   {
     id: 6,
-    systemName: "System F",
+    systemName: "9S7-15G221-02S",
     systemInfo: {
       State: "Pre-production",
       Series: "CreatorBook",
@@ -284,7 +284,7 @@ export const benchmarkSystems: BenchmarkSystem[] = [
       EC: "EC1.5",
       VBIOS: "V2.07",
       VGA_Driver: "551.23",
-      PN: "CBX5467",
+      PN: "927-17N212-06S",
       PMSubmitDate: "2025-03-01",
       TargetCompletionDate: "2025-04-15",
       ActualCompletionDate: null

@@ -19,8 +19,8 @@ import { benchmarkSystems } from '../data/benchmark-data';
 
 // 示例筛选器数据
 const marketOptions = ["Global", "US", "EU", "APAC", "China", "Japan", "Taiwan"];
-const modelOptions = ["PowerBook Pro", "TravelBook", "GamingBook X", "CreatorBook Pro", "UltraBook Air", "BusinessBook"];
-const pnOptions = ["PBX9012", "TBZ7890", "GBX4567", "CBX5467", "UBX2345", "BBX1234"];
+const modelOptions = ["MS-15G2", "MS-13P3", "GamingBook X", "CreatorBook Pro", "UltraBook Air", "BusinessBook"];
+const pnOptions = ["9S7-15G221-02S", "9S7-13P311-25S", "9S7-15M111-02S", "9S7-17Q211-05S", "9S7-17Q211-06S", "9S7-15G221-02S"];
 
 export default function HomePage() {
   // 篩選狀態
@@ -164,7 +164,7 @@ export default function HomePage() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">MKT</label>
               <select 
                 className="w-full p-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900"
@@ -176,7 +176,7 @@ export default function HomePage() {
                   <option key={option} value={option}>{option}</option>
                 ))}
               </select>
-            </div>
+            </div> */}
             
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Model</label>
@@ -226,11 +226,11 @@ export default function HomePage() {
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead>
                       <tr className="bg-gray-50 dark:bg-gray-750">
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">System</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">P/N</th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">CPU / GPU</th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">MKT</th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Model</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">P/N</th>
+                        {/* <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">P/N</th> */}
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Time Spy</th>
                       </tr>
                     </thead>
@@ -251,7 +251,7 @@ export default function HomePage() {
                           </td>
                           <td className="px-4 py-3 whitespace-nowrap text-sm">{system.systemInfo.MKT || 'N/A'}</td>
                           <td className="px-4 py-3 whitespace-nowrap text-sm">{system.systemInfo.Model || 'N/A'}</td>
-                          <td className="px-4 py-3 whitespace-nowrap text-sm">{system.systemInfo.PN || 'N/A'}</td>
+                          {/* <td className="px-4 py-3 whitespace-nowrap text-sm">{system.systemInfo.PN || 'N/A'}</td> */}
                           <td className="px-4 py-3 whitespace-nowrap text-sm font-mono">
                             {system.benchmarkScores.TimeSpy?.toLocaleString() || 'N/A'}
                           </td>
